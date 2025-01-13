@@ -101,3 +101,60 @@ This endpoint allows clients to log in an existing user.
   "message": "Invalid email or password"
 }
 ```
+
+# /users/profile
+
+This endpoint allows clients to get their profile information.
+
+## Request
+
+• Method: `GET`  
+• URL: `/users/profile`  
+• Headers: 
+  - `Authorization: Bearer <token>`
+
+## Response
+
+• **200 OK** – Returns the user profile data
+```json
+{
+  "_id": "string",
+  "fullname": {
+    "firstname": "string",
+    "lastname": "string"
+  },
+  "email": "string"
+}
+```
+• **401 Unauthorized** – If no token is provided or token is invalid
+```json
+{
+  "message": "Unauthorized"
+}
+```
+
+# /users/logout
+
+This endpoint allows clients to logout and invalidate their token.
+
+## Request
+
+• Method: `GET`  
+• URL: `/users/logout`  
+• Headers: 
+  - `Authorization: Bearer <token>`
+
+## Response
+
+• **200 OK** – Returns success message when logout is successful
+```json
+{
+  "message": "Logged out successfully"
+}
+```
+• **401 Unauthorized** – If no token is provided or token is invalid
+```json
+{
+  "message": "Unauthorized"
+}
+```

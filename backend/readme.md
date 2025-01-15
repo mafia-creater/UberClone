@@ -221,3 +221,126 @@ This endpoint allows clients to register a new captain.
   ]
 }
 ```
+
+
+
+# /captains/login
+
+This endpoint allows captains to log in.
+
+## Request
+
+- Method: `POST`  
+- URL: `/captains/login`  
+- Content-Type: `application/json`
+
+### Body (JSON)
+```json
+{
+  "email": "string (required, must be valid email)",
+  "password": "string (required, min 6 chars)"
+}
+```
+
+## Response
+
+- **200 OK** – Returns a JSON object with the `token` and `captain` data on successful login.  
+```json
+{
+  "token": "string",
+  "captain": {
+    "_id": "string",
+    "fullname": {
+      "firstname": "string",
+      "lastname": "string"
+    },
+    "email": "string",
+    "vehicle": {
+      "color": "string",
+      "plate": "string",
+      "capacity": "number",
+      "vehicleType": "string"
+    }
+  }
+}
+```
+- **400 Bad Request** – If validation fails or required fields are missing.  
+```json
+{
+  "errors": [
+    {
+      "msg": "string",
+      "param": "string",
+      "location": "string"
+    }
+  ]
+}
+```
+- **401 Unauthorized** – If the email or password is incorrect.  
+```json
+{
+  "message": "Invalid email or password"
+}
+```
+
+# /captains/profile
+
+This endpoint allows captains to get their profile information.
+
+## Request
+
+- Method: `GET`  
+- URL: `/captains/profile`  
+- Headers: 
+  - `Authorization: Bearer <token>`
+
+## Response
+
+- **200 OK** – Returns the captain profile data
+```json
+{
+  "_id": "string",
+  "fullname": {
+    "firstname": "string",
+    "lastname": "string"
+  },
+  "email": "string",
+  "vehicle": {
+    "color": "string",
+    "plate": "string",
+    "capacity": "number",
+    "vehicleType": "string"
+  }
+}
+```
+- **401 Unauthorized** – If no token is provided or token is invalid
+```json
+{
+  "message": "Unauthorized"
+}
+```
+
+# /captains/logout
+
+This endpoint allows captains to logout and invalidate their token.
+
+## Request
+
+- Method: `GET`  
+- URL: `/captains/logout`  
+- Headers: 
+  - `Authorization: Bearer <token>`
+
+## Response
+
+- **200 OK** – Returns success message when logout is successful
+```json
+{
+  "message": "Logged out successfully"
+}
+```
+- **401 Unauthorized** – If no token is provided or token is invalid
+```json
+{
+  "message": "Unauthorized"
+}

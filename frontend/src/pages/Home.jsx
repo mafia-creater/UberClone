@@ -1,19 +1,35 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import UberLogo from "../assets/UberLogo.png";
+import React from 'react'
 
 const Home = () => {
+
+  const submitHandler = (e) => {
+    e.preventDefault()
+  }
+
+
   return (
-    <div>
-      <div className='bg-cover bg-bottom bg-[url(https://images.pexels.com/photos/4606397/pexels-photo-4606397.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)] h-screen pt-8 w-full flex flex-col justify-between '>
-        <img className='w-16 ml-8' src={UberLogo} alt="Uber Logo" />
-        <div className='bg-white pb-7 py-4 px-4'>
-          <h2 className='text-3xl font-bold'>Get Started with Uber</h2>
-          <Link to='/login' className='flex items-center justify-center w-full bg-black text-white py-3 rounded mt-5'>Continue</Link>
+    <div className='h-screen relative '>
+      <img className='w-16 absolute left-5 top-5' src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" alt="" />
+      <div className='h-screen w-screen '>
+        <img className='h-full w-full object-cover' src="https://cdn.olaelectric.com/olakrutrim/maps/ecosystem_driven_sec_img_2_mweb.webp" alt="" />
+      </div>
+      <div className=' flex flex-col justify-end  h-screen absolute top-0 w-full'>
+        <div className='h-[30%] p-5 bg-white relative'>
+          <h4 className='text-2xl font-semibold '>Find a trip</h4>
+          <form onSubmit={(e)=>{
+            submitHandler(e)
+          }}>
+            <div className="line absolute h-16 w-1 top-[35%] left-10  bg-gray-900 rounded-full "></div>
+            <input className='bg-[#eee] px-12 py-2 text-lg rounded-lg w-full mt-5' type="text" placeholder='Add a pick-up location'/>
+            <input className='bg-[#eee] px-12 py-2 text-lg rounded-lg mt-3' type="text" placeholder='Enter your destination' />
+          </form>
+        </div>
+        <div className='h-0' >
+
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Home;
+export default Home
